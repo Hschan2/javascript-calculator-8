@@ -83,6 +83,11 @@ class App {
   async sumNumbers(numberArr) {
     return numberArr.reduce((acc, cur) => acc + Number(cur), 0);
   }
+
+  async gameResult(userInput) {
+    const getSumNumbers = await this.sumNumbers(userInput);
+    return getSumNumbers;
+  }
 }
 
 export default App;
