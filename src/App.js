@@ -79,6 +79,10 @@ class App {
 
     return userInput;
   }
+
+  async sumNumbers(numberArr) {
+    return numberArr.reduce((acc, cur) => acc + Number(cur), 0);
+  }
 }
 
 export default App;
