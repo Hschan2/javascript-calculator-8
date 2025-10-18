@@ -32,6 +32,14 @@ class App {
     return await this.separateNormal(userInput);
   }
 
+  async isCustomSeparator(userInput) {
+    if (userInput.includes('//') && userInput.includes('\\n')) {
+      return true;
+    }
+
+    return false;
+  }
+
   async separateNormal(userInput) {
     return userInput.split(/,|:/);
   }
