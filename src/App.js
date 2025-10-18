@@ -6,12 +6,7 @@ class App {
   }
 
   async start() {
-    MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요.");
-    await this.inputText();
-  }
-
-  async inputText() {
-    const userInput = await MissionUtils.Console.readLineAsync();
+    const userInput = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
     await this.checkUserInput(userInput);
   }
 
