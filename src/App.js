@@ -53,7 +53,32 @@ class App {
     return numbersString.split(delimiterRegex).filter(s => s !== '');
   }
 
+  async validateInputText(userInput) {
+    const checkIncludedString = await this.isIncludedString(userInput);
+    const checkIncludedNegativeNumbers = await this.isIncludedNegativeNumber(checkIncludedString);
 
+    return checkIncludedNegativeNumbers;
+  }
+
+  async isIncludedString(userInput) {
+    const invalidChar = userInput.filter(v => isNaN(v));
+
+    if (invalidChar.length > 0) {
+      throw new Error("[ERROR] 문자열에 숫자가 아닌 문자가 포함되어 있습니다.");
+    }
+
+    return userInput;
+  }
+
+  async isIncludedNegativeNumber(userInput) {
+    const negativeNumbers = userInput.filter(v => Number(v) < 0);
+
+    if (negativeNumbers.length > 0) {
+      throw new Error("[ERROR] 문자열에 음수가 포함되어 있습니다.");
+    }
+
+    return userInput;
+  }
 }
 
 export default App;
