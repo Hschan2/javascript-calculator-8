@@ -1,17 +1,14 @@
 import { MissionUtils } from '@woowacourse/mission-utils'
+import { RESULT_MESSAGE } from './constants/message';
 
 class Game {
     constructor(refinedInput) {
         this.refinedInput = refinedInput;
-        this.sum = null;
-    }
-
-    async isSum() {
         this.sum = this.refinedInput.reduce((acc, cur) => acc + Number(cur), 0);
     }
 
-    async resultPrint() {
-        MissionUtils.Console.print(`결과 : ${this.sum}`);
+    resultPrint() {
+        MissionUtils.Console.print(RESULT_MESSAGE(this.sum));
     }
 }
 
