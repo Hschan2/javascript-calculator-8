@@ -1,36 +1,30 @@
+import { ERROR_MESSAGE } from "./constants/message";
+
 class Valid {
-    constructor(separatedInput) {
-        this.separatedInput = separatedInput;
-        this.validInput = null;
+    constructor() {
     }
 
-    async isValid() {
-        const checkString = await this.isIncludedString(this.separatedInput);
-        const checkNegativeNumber = await this.isIncludedNegativeNumber(checkString);
+    validate(userInput) {
+        const checkedForString = this.isIncludedString(userInput);
+        const checkedForNegative = this.isIncludedNegativeNumber(checkedForString);
 
-        this.validInput = checkNegativeNumber;
+        return checkedForNegative;
     }
 
-    async isIncludedString(userInput) {
-        const invalidChar = userInput.filter(v => isNaN(v));
+    isIncludedString(userInput) {
+        const invalidChar = userInput.filter(v => isNaN(v) || v === '');
         if (invalidChar.length > 0) {
-            throw new Error("[ERROR] 문자열에 숫자가 아닌 문자가 포함되어 있습니다.");
+            throw new Error(ERROR_MESSAGE.IS_NOT_ONLY_NUMBER);
         }
-
         return userInput;
     }
 
-    async isIncludedNegativeNumber(userInput) {
+    isIncludedNegativeNumber(userInput) {
         const negativeNumbers = userInput.filter(v => Number(v) < 0);
         if (negativeNumbers.length > 0) {
-            throw new Error("[ERROR] 문자열에 음수가 포함되어 있습니다.");
+            throw new Error(ERROR_MESSAGE.IS_NEGATIVE_NUMBER);
         }
-
         return userInput;
-    }
-
-    getValidInput() {
-        return this.validInput;
     }
 }
 
